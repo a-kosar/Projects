@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Log in</title>
+    <link rel="stylesheet" href="/login-style.css">
+</head>
+<body id="login-body">
+<div class="container">
+    <img src="../icon.png" alt="">
+    <div class="inner-container">
+        <div class="data-form">
+            <p id="heading">Login</p>
+            <form class="login" th:action="@{/users/login}" th:object="${userDTO}" method="post">
+                <div class="input-field">
+                    <p>Username:</p>
+                    <input type="text" id="username" th:field="*{username}" class="data-input" placeholder="Enter your username" required>
+                    <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+                </div>
+                <div class="input-field">
+                    <p>Password:</p>
+                    <input type="password" id="password" th:field="*{password}" class="data-input" placeholder="Enter your password" required>
+                    <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+                </div>
+                <button type="submit" class="submit login-btn">Submit</button>
+            </form>
+                <div class="readdress">
+                    <p>Don't have an account?</p>
+                    <form action="/users/register" method="get">
+                        <button type="submit" class="redirect-btn"><span>Sign up</span></button>
+                    </form>
+                </div>
+            <div th:if="${error}" class="error-message">
+                <p th:text="${error}" class="error-text"></p>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

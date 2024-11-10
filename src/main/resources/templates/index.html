@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dog Encyclopedia</title>
+    <link rel="stylesheet" href="/index-style.css">
+</head>
+<body>
+<header>
+    <div class="menu">
+        <button class="menu-button">Menu</button>
+        <div class="menu-list">
+            <a href="#">Home</a>
+            <a href="#">Breeds</a>
+            <a href="#">Contact</a>
+        </div>
+    </div>
+    <h1>Dog Encyclopedia</h1>
+    <form th:if="${param.id != null}" th:action="@{/users/profile}" method="get">
+        <input type="hidden" name="id" th:value="${param.id}">
+        <button type="submit" class="get-started">PROFILE</button>
+    </form>
+    <form action="/users/register" method="get">
+        <button type="submit" class="get-started">GET STARTED</button>
+    </form>
+</header>
+<main>
+    <div class="search-filter">
+        <form action="/breeds/search" method="get">
+            <input type="text" name="pattern" placeholder="Search for a breed..." class="search-field">
+            <button class="search-button">Search</button>
+            <select name="filter" class="filter-dropdown">
+                <option value="all">All</option>
+                <option value="name">Name</option>
+                <option value="size">Size</option>
+                <option value="lifespan">Lifespan</option>
+            </select>
+        </form>
+    </div>
+
+    <div class="content">
+        <div class="description">
+            <h2>Your new favourite encyclopedia</h2>
+            <p>Welcome to the Dog Encyclopedia – your ultimate dog guide. If you're a dog lover, pet owner, breeder or even biology teacher, that's a place for you! Our platform provides detailed and reliable information on a plenty of dog breeds.</p>
+            <a href="#">
+                <span>Learn more...</span>
+            </a>
+        </div>
+
+        <div class="links">
+            <div class="link-item">
+                <img src="../index-img/breed1.jpg" alt="">
+                <a th:href="@{/breeds/get?id=1}">
+                    <span>Labrador Retriever</span>
+                </a>
+            </div>
+            <div class="link-item">
+                <img src="../index-img/breed2.webp" alt="">
+                <a th:href="@{/breeds/get?id=2}">
+                    <span>German Shepherd Dog</span>
+                </a>
+            </div>
+            <div class="link-item">
+                <img src="../index-img/breed3.webp" alt="">
+                <a th:href="@{/breeds/get?id=3}">
+                    <span>Beagle</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="adoption">
+        <h1>Find yourself a fluffy friend</h1>
+        <h4>Choose from a plenty of dogs from the charities we cooperate with.</h4>
+        <div class="adoption-links">
+            <div class="adoption-item">
+                <img src="../index-img/adoption1.jpg" alt="">
+                <a th:href="@{/adoption/get?id=1}">
+                    <span>Barbie</span>
+                </a>
+                <p>This female toy fox terrier is a fun companion and a loving friend.</p>
+                <p>Barbie loves going on long walks outside.</p>
+                <form th:if="${param.id != null}" th:action="@{/adoption/form/{id}(id=${param.id})}" method="get">
+                    <input type="hidden" name="userId" th:value="${param.id}">
+                    <input type="hidden" name="dogId" th:value="1">
+                    <button type="submit" class="get-started">Adopt</button>
+                </form>
+            </div>
+            <div class="adoption-item">
+                <img src="../index-img/adoption2.jpg" alt="">
+                <a th:href="@{/adoption/get?id=2}">
+                    <span>Mary</span>
+                </a>
+                <p>This beagle is 6 years old, yet still extremely adventurous and curious.</p>
+                <p>With her great determination and loving personality she's looking for a kind pet parent.</p>
+                <form th:if="${param.id != null}" th:action="@{/adoption/form/{id}(id=${param.id})}" method="get">
+                    <input type="hidden" name="userId" th:value="${param.id}">
+                    <input type="hidden" name="dogId" th:value="2">
+                    <button type="submit" class="get-started">Adopt</button>
+                </form>
+            </div>
+            <div class="adoption-item">
+                <img src="../index-img/adoption3.jpg" alt="">
+                <a th:href="@{/adoption/get?id=3}">
+                    <span>Tofu</span>
+                </a>
+                <p>A friendly 3-year-old bulldog is looking for a new family!</p>
+                <p>He loves playing with bright toys and people.</p>
+                <form th:if="${param.id != null}" th:action="@{/adoption/form/{id}(id=${param.id})}" method="get">
+                    <input type="hidden" name="userId" th:value="${param.id}">
+                    <input type="hidden" name="dogId" th:value="3">
+                    <button type="submit" class="get-started">Adopt</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <img src="../icon.png" alt="">
+    <p>Copyright © 2024 Dog encyclopedia</p>
+</footer>
+</body>
+</html>

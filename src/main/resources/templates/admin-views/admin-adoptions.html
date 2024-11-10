@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrator: Adoptions</title>
+    <link rel="stylesheet" href="/admin-style.css">
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>Administrator: Adoptions</h1>
+        <img src="/icon.png" alt="" class="logo">
+    </div>
+
+    <div class="button-row">
+        <form action="/admin/adoptions" method="post">
+            <button type="submit" name="action" value="GET">Get</button>
+            <button type="submit" name="action" value="POST">Post</button>
+            <button type="submit" name="action" value="PUT">Put</button>
+            <button type="submit" name="action" value="DELETE">Delete</button>
+        </form>
+
+        <form action="/admin/adoptions/all" method="get">
+            <button type="submit">Get all</button>
+        </form>
+    </div>
+
+    <div class="option" th:if="${action == 'GET'}">
+        <form th:action="@{/admin/adoptions/get}" method="get">
+            <label>Id:</label>
+            <input type="number" name="id" th:value="${id}" required>
+            <button type="submit" class="submit-btn">Get</button>
+        </form>
+    </div>
+
+    <div class="option" th:if="${action == 'PUT'}">
+        <form th:action="@{/admin/adoptions/put}" method="get" th:object="${updateDto}">
+            <label>Id:</label>
+            <input type="number" name="id" required>
+            <label>Name:</label>
+            <input type="text" th:field="*{name}">
+            <label>Sex:</label>
+            <input type="text" th:field="*{sex}">
+            <label>Age:</label>
+            <input type="number" th:field="*{age}">
+            <label>Weight:</label>
+            <input type="number" step="0.1" th:field="*{weight}">
+            <label>Description:</label>
+            <input type="text" th:field="*{description}">
+            <label>Appearance:</label>
+            <input type="text" th:field="*{appearance}">
+            <label>Availability:</label>
+            <input type="checkbox" th:field="*{availability}">
+            <button type="submit" class="submit-btn">Update</button>
+        </form>
+    </div>
+
+    <div class="option" th:if="${action == 'POST'}">
+        <form th:action="@{/admin/adoptions/add}" th:object="${adoptionDto}" method="post">
+            <div class="post-container">
+                <label for="name">Name:</label>
+                <input type="text" id="name" th:field="*{name}" required>
+                <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+
+                <label for="sex">Sex:</label>
+                <input type="text" id="sex" name="sex" th:field="*{sex}" required pattern="^(male|female)$" title="Male or female">
+                <span th:if="${#fields.hasErrors('sex')}" th:errors="*{sex}"></span>
+
+                <label for="age">Age:</label>
+                <input type="number" id="age" th:field="*{age}" required>
+                <span th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></span>
+
+                <label for="weight">Weight:</label>
+                <input type="number" step="0.1" id="weight" th:field="*{weight}" required>
+                <span th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}"></span>
+            </div>
+
+            <div class="post-container">
+                <label for="description">Description:</label>
+                <input type="text" id="description" th:field="*{description}" required>
+                <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
+
+                <label for="appearance">Appearance:</label>
+                <input type="text" id="appearance" th:field="*{appearance}" required>
+                <span th:if="${#fields.hasErrors('appearance')}" th:errors="*{appearance}"></span>
+
+                <label for="availability">Availability:</label>
+                <input type="checkbox" id="availability" th:field="*{availability}">
+            </div>
+
+            <button type="submit" class="submit-btn">Post</button>
+        </form>
+    </div>
+
+    <div class="option" th:if="${action == 'DELETE'}">
+        <form th:action="@{/admin/adoptions/delete}" method="get">
+            <label>Id:</label>
+            <input type="number" name="id" required>
+            <button type="submit" class="submit-btn">Delete</button>
+        </form>
+    </div>
+
+    <div th:if="${success}" class="success-message" th:text="${success}"></div>
+    <div th:if="${error}" class="error-message" th:text="${error}"></div>
+
+    <div th:if="${adoption}">
+        <p th:text="'Name: ' + ${adoption.name}"></p>
+        <p th:text="'Sex: ' + ${adoption.sex}"></p>
+        <p th:text="'Age: ' + ${adoption.age}"></p>
+        <p th:text="'Weight: ' + ${adoption.weight}"></p>
+        <p th:text="'Description: ' + ${adoption.description}"></p>
+        <p th:text="'Appearance: ' + ${adoption.appearance}"></p>
+        <p th:text="'Availability: ' + ${adoption.availability}"></p>
+    </div>
+
+    <div th:if="${adoptionDtos}">
+        <ul>
+            <li th:each="dto : ${adoptionDtos}">
+                <p th:text="'Name: ' + ${dto.name}"></p>
+                <p th:text="'Sex: ' + ${dto.sex}"></p>
+                <p th:text="'Age: ' + ${dto.age}"></p>
+                <p th:text="'Weight: ' + ${dto.weight}"></p>
+                <p th:text="'Description: ' + ${dto.description}"></p>
+                <p th:text="'Appearance: ' + ${dto.appearance}"></p>
+                <p th:text="'Availability: ' + ${dto.availability}"></p>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

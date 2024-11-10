@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Adoption Option</title>
+    <link rel="stylesheet" href="/breeds.css">
+</head>
+<body>
+<h1 class="header">Adoption Option</h1>
+
+<div class="container" th:if="${option}">
+    <p th:text="${option.name}"></p>
+    <a th:href="@{${option.appearance}}" target="_blank">
+        <img th:src="@{${option.appearance}}" alt="" style="width: 100px; height: auto;">
+    </a>
+</div>
+
+</body>
+</html>

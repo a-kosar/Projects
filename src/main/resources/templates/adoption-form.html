@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Adoption Form</title>
+    <link rel="stylesheet" href="/login-style.css">
+</head>
+<body id="adoption-body">
+<div class="container">
+    <img src="../icon.png" alt="">
+    <div class="inner-container">
+        <div class="data-form">
+            <p id="heading">Adoption Form</p>
+            <form class="adoption" th:action="@{/adoption/submit}" method="post">
+                <input type="hidden" id="userId" name="userId" th:value="${userId}">
+                <input type="hidden" id="adoptionId" name="adoptionId" th:value="${adoption}">
+
+                <div class="input-field">
+                    <p>Your Name:</p>
+                    <input type="text" id="name" name="name" class="data-input" placeholder="Enter your name" required>
+                </div>
+                <div class="input-field">
+                    <p>Email:</p>
+                    <input type="email" id="email" name="email" class="data-input" placeholder="Enter your email" required>
+                </div>
+                <div class="input-field">
+                    <p>Phone Number:</p>
+                    <input type="text" id="phone" name="phone" class="data-input" placeholder="Enter your phone number" required>
+                </div>
+                <div class="input-field">
+                    <p>Description:</p>
+                    <textarea id="description" name="description" class="data-input" placeholder="Tell us why do you want to adopt this pet" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="submit login-btn">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

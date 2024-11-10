@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrator</title>
+    <link rel="stylesheet" href="/admin-style.css">
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>Administrator: types</h1>
+        <img src="/icon.png" alt="" class="logo">
+    </div>
+    <div class="button-row">
+        <form action="/admin/types" method="post">
+            <button type="submit" name="action" value="GET">Get</button>
+            <button type="submit" name="action" value="POST">Post</button>
+            <button type="submit" name="action" value="PUT">Put</button>
+            <button type="submit" name="action" value="DELETE">Delete</button>
+        </form>
+        <form action="/admin/types/all" method="get">
+            <button type="submit">Get all</button>
+        </form>
+    </div>
+
+    <div class="option" th:if="${action == 'GET'}">
+        <form th:action="@{/admin/types/get}" method="get">
+            <label>Id:</label>
+            <input type="number" name="id" th:value="${id}" required>
+            <button type="submit" class="submit-btn">Get</button>
+        </form>
+    </div>
+
+    <div class="option" th:if="${action == 'PUT'}">
+        <form th:action="@{/admin/types/put}" method="get" th:object="${updateDto}">
+            <label>Id:</label>
+            <input type="number" name="id" required>
+            <label>Group:</label>
+            <input type="text" th:field="*{group}">
+            <label>Purpose:</label>
+            <input type="text" th:field="*{purpose}">
+            <label>Family Friendly:</label>
+            <input type="checkbox" th:field="*{familyFriendly}" class="styled-checkbox">
+            <button type="submit" class="submit-btn">Update</button>
+        </form>
+    </div>
+
+
+    <div class="option" th:if="${action == 'POST'}">
+        <form th:action="@{/admin/types/add}" th:object="${typeDto}" method="post">
+            <label for="group">Group:</label>
+            <input type="text" id="group" th:field="*{group}" required>
+            <span th:if="${#fields.hasErrors('group')}" th:errors="*{group}"></span>
+
+            <label for="purpose">Purpose:</label>
+            <input type="text" id="purpose" th:field="*{purpose}" required>
+            <span th:if="${#fields.hasErrors('purpose')}" th:errors="*{purpose}"></span>
+
+            <label for="familyFriendly">Family Friendly:</label>
+            <input type="checkbox" id="familyFriendly" th:field="*{familyFriendly}">
+            <button type="submit" class="submit-btn">Post</button>
+        </form>
+    </div>
+
+    <div class="option" th:if="${action == 'DELETE'}">
+        <form th:action="@{/admin/types/delete}" method="get">
+            <label>Id:</label>
+            <input type="number" name="id" required>
+            <button type="submit" class="submit-btn">Delete</button>
+        </form>
+    </div>
+
+    <div th:if="${success}" class="success-message" th:text="${success}"></div>
+    <div th:if="${error}" class="error-message" th:text="${error}"></div>
+
+    <div th:if="${type}">
+        <p th:text="'Group: ' + ${type.group}"></p>
+        <p th:text="'Purpose: ' + ${type.purpose}"></p>
+        <p th:text="'Family Friendly: ' + ${type.familyFriendly}"></p>
+    </div>
+
+    <div th:if="${typeDtos}">
+        <ul>
+            <li th:each="dto : ${typeDtos}">
+                <p th:text="'Group: ' + ${dto.group}"></p>
+                <p th:text="'Purpose: ' + ${dto.purpose}"></p>
+                <p th:text="'Family Friendly: ' + ${dto.familyFriendly}"></p>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

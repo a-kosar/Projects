@@ -1,0 +1,94 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10%;
+    align-items: flex-start;
+}
+
+.container {
+    text-align: center;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10%;
+    font-family: Georgia, serif;
+}
+
+.header h1 {
+    margin: 0 10px 0 0;
+    font-weight: normal;
+}
+
+.header .logo {
+    height: 40px;
+    width: auto;
+}
+
+.button-row {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.button-row button {
+    background: #151d3c;
+    text-transform: uppercase;
+    margin: 0 50px 50px 50px;
+    padding: 10px 20px;
+    font-size: 14px;
+}
+
+.command-input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.command-input textarea {
+    font-family: Arial, sans-serif;
+    padding: 10px;
+    font-size: 16px;
+    margin-right: 10px;
+    width: 60%;
+    height: 60px;
+    resize: vertical;
+}
+
+.submit-btn {
+    padding: 5px 10px;
+    font-size: 16px;
+    background: #7282bf;
+    border-radius: 5px;
+}
+
+button {
+    color: white;
+}
+
+.option {
+    font-size: 20px;
+}
+
+.option input {
+    height: 30px;
+}
+
+.styled-checkbox {
+    width: 20px;
+    height: 20px;
+}
+
+li {
+    margin-bottom: 10px;
+    list-style-type: none;
+    background: #7282bf;
+    padding: 10px;
+    color: white;
+}
+
+.post-container {
+    margin-bottom: 20px;
+}

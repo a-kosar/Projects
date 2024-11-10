@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrator: Colours</title>
+    <link rel="stylesheet" href="/admin-style.css">
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>Administrator: Colours</h1>
+        <img src="/icon.png" alt="" class="logo">
+    </div>
+
+    <div class="button-row">
+        <form action="/admin/colours" method="post">
+            <button type="submit" name="action" value="GET">Get</button>
+            <button type="submit" name="action" value="POST">Post</button>
+            <button type="submit" name="action" value="PUT">Put</button>
+            <button type="submit" name="action" value="DELETE">Delete</button>
+        </form>
+
+        <form action="/admin/colours/all" method="get">
+            <button type="submit">Get all</button>
+        </form>
+    </div>
+
+    <div class="option" th:if="${action == 'GET'}">
+        <form th:action="@{/admin/colours/get}" method="get">
+            <label>Id:</label>
+            <input type="number" name="id" th:value="${id}" required>
+            <button type="submit" class="submit-btn">Get</button>
+        </form>
+    </div>
+
+    <div class="option" th:if="${action == 'PUT'}">
+        <form th:action="@{/admin/colours/put}" method="get" th:object="${updateDto}">
+            <label>Id:</label>
+            <input type="number" name="id" required>
+            <label>Code:</label>
+            <input type="text" th:field="*{code}">
+            <label>Name:</label>
+            <input type="text" th:field="*{name}">
+            <button type="submit" class="submit-btn">Update</button>
+        </form>
+    </div>
+
+    <div class="option" th:if="${action == 'POST'}">
+        <form th:action="@{/admin/colours/add}" th:object="${colourDto}" method="post">
+            <label for="code">Code:</label>
+            <input type="text" id="code" th:field="*{code}" required>
+            <span th:if="${#fields.hasErrors('code')}" th:errors="*{code}"></span>
+
+            <label for="name">Name:</label>
+            <input type="text" id="name" th:field="*{name}" required>
+            <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+
+            <button type="submit" class="submit-btn">Post</button>
+        </form>
+    </div>
+
+    <div class="option" th:if="${action == 'DELETE'}">
+        <form th:action="@{/admin/colours/delete}" method="get">
+            <label>Id:</label>
+            <input type="number" name="id" required>
+            <button type="submit" class="submit-btn">Delete</button>
+        </form>
+    </div>
+
+    <div th:if="${success}" class="success-message" th:text="${success}"></div>
+    <div th:if="${error}" class="error-message" th:text="${error}"></div>
+
+    <div th:if="${colour}">
+        <p th:text="'Code: ' + ${colour.code}"></p>
+        <p th:text="'Name: ' + ${colour.name}"></p>
+    </div>
+
+    <div th:if="${colourDtos}">
+        <ul>
+            <li th:each="dto : ${colourDtos}">
+                <p th:text="'Code: ' + ${dto.code}"></p>
+                <p th:text="'Name: ' + ${dto.name}"></p>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

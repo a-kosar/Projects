@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dog Breeds</title>
+    <link rel="stylesheet" href="/breeds.css">
+</head>
+<body>
+<h1 class="header">Dog Breeds</h1>
+<div class="container" th:if="${breeds}"></div>
+    <ul>
+        <li th:each="breed : ${breeds}">
+            <p th:text="${breed.name}"></p>
+            <a th:href="@{${breed.appearance}}" target="_blank">
+                <img th:src="@{${breed.appearance}}" alt="Breed Image" style="width: 100px; height: auto;">
+            </a>
+        </li>
+    </ul>
+</div>
+
+<div th:if="${noResult}">
+    <p>No results found.</p>
+</div>
+
+</body>
+</html>
