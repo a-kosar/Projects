@@ -1,1 +1,1 @@
-# Projects
+# Dog encyclopedia project in Java.
